@@ -1,5 +1,5 @@
 {
-  "name": "day02-counter",
+  "name": "day05-guess-the-number",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
