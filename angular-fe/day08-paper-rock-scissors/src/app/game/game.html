@@ -1,0 +1,24 @@
+<div class="game-container">
+  <h1>Rock, Paper, Scissors</h1>
+
+  <div class="choices">
+    @for (choice of choices; track choice) {
+      <button (click)="play(choice)">
+        <img [src]="choice.toLowerCase() + '.jpeg'" [alt]="choice" />
+        {{ choice }}
+      </button>
+    }
+  </div>
+
+  @if (playerChoice && computerChoice) {
+    <div class="result">
+      <h2>
+        You chose:
+        <strong> {{ playerChoice }}</strong>
+      </h2>
+      <img [src]="playerChoice.toLocaleLowerCase() + '.jpeg'" [alt]="playerChoice" />
+      <h2>{{ result }}</h2>
+    </div>
+  }
+
+</div>
