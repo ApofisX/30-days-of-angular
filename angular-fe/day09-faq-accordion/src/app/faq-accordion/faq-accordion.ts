@@ -7,7 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './faq-accordion.scss',
 })
 export class FaqAccordion {
-  private static readonly _FAQS = [
+  openIndex: number | null = null;
+
+  readonly FAQS = [
     {
       question: 'What is Angular?',
       answer: 'Angular is a platform for building mobile and desktop web applications.',
@@ -23,4 +25,8 @@ export class FaqAccordion {
         'Directives are instructions in the DOM. Angular directives allow you to attach behavior to elements in the DOM.',
     },
   ];
+
+  toggleFAQ(index: number) {
+    this.openIndex = this.openIndex == index ? null : index;
+  }
 }
