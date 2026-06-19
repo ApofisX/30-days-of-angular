@@ -116,6 +116,43 @@ Then run `pnpm install` again.
 - `$event` (of type KeyboardEvent) - pass native event object to handler: `(keydown)="onKey($event)"`
 - Calling component methods from template
 
+### Day 05 - Guess the Number
+**Concepts:**
+- `[disabled]="expression"` - conditionally disable input or button from template
+- `private static readonly` constants on the component class - good pattern for constant values
+- `private static` methods - utility logic that doesn't need instance access
+- Optional fields with `?` - `guessedNumber?: number` the same as `guessedNumber: number | null`
+- Template calling methods with arguments: `[disabled]="!isValidGuess(guessedNumber)"`
+- `protected` visibility - accessible from template but not from outside the class
+
+### Day 06 - Tic Tac Toe
+**Concepts:**
+- `Array(9).fill("")` - create and initialize a fixed-length array
+- Iterating an array by index: `@for (cell of board; track i; let i = $index)`
+- Decomposing logic into small private methods (`_isCellOccupied`, `_isGameOver`, etc.)
+- `array.every()` / `array.some()` for board state checks
+- Array destructuring in `.some()`: `([a, b, c]) => ...`
+
+### Day 07 - Dynamic List Filter
+**Concepts:**
+- Custom pipe: `@Pipe({ name: 'filter' })` + `implements PipeTransform` with `transform(value, ...args)` method
+- Using a pipe in template: `items | filter : searchText`
+- Pipes must be imported in the component's `imports: []` array (standalone)
+- Pipe receives the left-hand value as first argument, colon-separated params as the rest
+
+### Day 08 - Rock Paper Scissors
+**Concepts:**
+- `[src]="expression"` / `[alt]="expression"` - dynamic image binding
+- Calling `.toLowerCase()` / `.toLocaleLowerCase()` directly in template expressions
+- Static class constants used as both data source and logic reference (`choices` array driven by the same constants used in `determineWinner`)
+
+### Day 09 - FAQ Accordion
+**Concepts:**
+- Toggle pattern: `this.openIndex = this.openIndex === index ? null : index`
+- `readonly` data arrays on the component - good for static content that never changes
+- `animate.enter` / `animate.leave` attributes - Angular animations API (declarative syntax)
+- Tracking by a property value: `track faq.question` when no numeric ID exists
+
 ---
 
 ## Notes
@@ -125,3 +162,6 @@ Then run `pnpm install` again.
 - `track $index` is safe for static lists; for dynamic lists always prefer a unique ID
 - `[ngModel]` is one-way (component → input); `[(ngModel)]` is two-way
 - `event.preventDefault()` in `keydown` handler stops a character from being inserted
+- `protected` members are accessible from the template but not from outside the class; prefer over `public` for template-only bindings
+- Pipes are pure by default - they only re-run when input reference changes, not on mutation; use impure pipes (`pure: false`) only when necessary as they run on every change detection cycle
+- Custom pipes must be added to `imports: []` in standalone components, same as modules
